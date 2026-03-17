@@ -1,4 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, push, onValue, remove } from "firebase/database";
+
+// ─── Firebase config ──────────────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyCNkv3piAngMm5pbKBocP1cUc3ybONmO44",
+  authDomain: "live-pulse-840db.firebaseapp.com",
+  databaseURL: "https://live-pulse-840db-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "live-pulse-840db",
+  storageBucket: "live-pulse-840db.firebasestorage.app",
+  messagingSenderId: "784038942714",
+  appId: "1:784038942714:web:ead55b2a485d32a52a3643"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const SESSION_REF = "sessions/current";
 
 const C = {
   navy:"#0D1B2E", navyMid:"#162438", navyLight:"#1E3050",
@@ -234,34 +251,32 @@ export default function App() {
   const [lastAt, setLastAt]       = useState(null);
   const [confirmReset, setConfirmReset] = useState(false);
 
-  const load = useCallback(async () => {
-    try {
-      const r = await window.storage.get(STORE_KEY, true);
-      setResponses(r ? JSON.parse(r.value) : []);
-    } catch { setResponses([]); }
-    setLastAt(new Date());
+  const load = useCallback(() => {
+    const r = ref(db, SESSION_REF);
+    const unsub = onValue(r, snap => {
+      const data = snap.val();
+      setResponses(data ? Object.values(data) : []);
+      setLastAt(new Date());
+    });
+    return unsub;
   }, []);
 
   useEffect(() => {
     if (mode !== "presenter") return;
-    load();
-    const iv = setInterval(load, 3000);
-    return () => clearInterval(iv);
+    const unsub = load();
+    return () => unsub();
   }, [mode, load]);
 
   async function submit() {
     const arc = classify(ans);
     setMyArc(arc);
     try {
-      let list = [];
-      try { const r = await window.storage.get(STORE_KEY, true); if(r) list = JSON.parse(r.value); } catch {}
-      list.push({ arc, ts: Date.now() });
-      await window.storage.set(STORE_KEY, JSON.stringify(list), true);
-    } catch {}
+      await push(ref(db, SESSION_REF), { arc, ts: Date.now() });
+    } catch(e) { console.error(e); }
   }
 
   async function reset() {
-    try { await window.storage.delete(STORE_KEY, true); } catch {}
+    try { await remove(ref(db, SESSION_REF)); } catch(e) { console.error(e); }
     setResponses([]); setConfirmReset(false);
   }
 
