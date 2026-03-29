@@ -416,7 +416,7 @@ export default function App() {
             />
             <div style={{textAlign:"center"}}>
               <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cyan,marginBottom:4}}>Scan to download the report</div>
-              <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.5}}>tinyurl.com/3jy2rxjx</div>
+              <a href="https://tinyurl.com/3jy2rxjx" target="_blank" rel="noreferrer" style={{fontSize:11,color:C.cyan,lineHeight:1.5,textDecoration:"underline",cursor:"pointer"}}>tinyurl.com/3jy2rxjx</a>
             </div>
           </div>
 
