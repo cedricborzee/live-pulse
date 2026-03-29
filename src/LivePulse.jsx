@@ -410,13 +410,13 @@ export default function App() {
           {/* QR card */}
           <div style={{background:"rgba(255,255,255,0.06)",backdropFilter:"blur(16px)",border:"1px solid rgba(0,194,224,0.2)",borderRadius:14,padding:"20px 24px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:12}}>
             <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://live-pulse-three.vercel.app&bgcolor=ffffff&color=0D1B2E&margin=2`}
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://tinyurl.com/3jy2rxjx&bgcolor=ffffff&color=0D1B2E&margin=2`}
               alt="QR code" width={160} height={160}
               style={{borderRadius:8,display:"block"}}
             />
             <div style={{textAlign:"center"}}>
               <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cyan,marginBottom:4}}>Scan to download the report</div>
-              <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.5}}>live-pulse-three.vercel.app</div>
+              <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.5}}>tinyurl.com/3jy2rxjx</div>
             </div>
           </div>
 
