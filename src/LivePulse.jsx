@@ -145,8 +145,8 @@ const ARCHETYPES = [
 ];
 
 const BENCHMARK = {
-  "Deliberate System Architect":18,"Fragmented Excellence":31,
-  "Measured, Not Believed":22,"Ambition-Led, Architecture-Light":29,
+  "Deliberate System Architect":30,"Fragmented Excellence":40,
+  "Measured, Not Believed":10,"Ambition-Led, Architecture-Light":20,
 };
 
 function classify(r) {
@@ -286,7 +286,13 @@ export default function App() {
     return c;
   }
 
-  const q   = QS[step];
+  // Pre-touch scale questions at value 1 when step changes
+  useEffect(() => {
+    if (q?.type === "scale") {
+      setAns(p => ({ ...p, [q.id]: p[q.id] ?? 1 }));
+      setTouched(p => new Set([...p, q.id]));
+    }
+  }, [step]);
   const ok  = q?.type === "scale" ? touched.has(q?.id) : ans[q?.id] !== undefined;
   const tot = responses.length;
 
@@ -483,6 +489,13 @@ export default function App() {
               borderRadius:8,padding:"8px 14px",cursor:"pointer",fontSize:11,fontWeight:600}}>
               ↺ Refresh
             </button>
+            {tot > 0 && (
+              <button onClick={downloadPDF} style={{background:"rgba(0,194,224,0.15)",
+                border:"1px solid rgba(0,194,224,0.3)",color:"#00C2E0",
+                borderRadius:8,padding:"8px 14px",cursor:"pointer",fontSize:11,fontWeight:700}}>
+                ↓ Download PDF
+              </button>
+            )}
             {confirmReset
               ? <div style={{display:"flex",gap:6,alignItems:"center"}}>
                   <span style={{fontSize:12,color:"rgba(255,255,255,0.4)"}}>Sure?</span>
