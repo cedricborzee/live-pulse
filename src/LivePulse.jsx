@@ -30,82 +30,12 @@ const C = {
 
 // ─── SVG backgrounds ──────────────────────────────────────────────────────────
 const BGSV = {
-  landing: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' preserveAspectRatio='xMidYMid slice'>
-    <defs>
-      <linearGradient id='sky1' x1='0' y1='0' x2='0' y2='1'>
-        <stop offset='0%' stop-color='#C8DCE8'/><stop offset='100%' stop-color='#E8F2F8'/>
-      </linearGradient>
-      <linearGradient id='glass1' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#7AAFC0' stop-opacity='0.55'/><stop offset='100%' stop-color='#3A7A9C' stop-opacity='0.35'/>
-      </linearGradient>
-    </defs>
-    <rect width='800' height='500' fill='url(#sky1)'/>
-    ${[0,1,2,3,4,5,6].map(i=>`<path d='M 400 520 Q ${180-i*18} ${80-i*30} ${90+i*12} ${320-i*20}' fill='none' stroke='white' stroke-width='${3-i*0.3}' opacity='${0.7-i*0.08}'/>
-    <path d='M 400 520 Q ${620+i*18} ${80-i*30} ${710-i*12} ${320-i*20}' fill='none' stroke='white' stroke-width='${3-i*0.3}' opacity='${0.7-i*0.08}'/>`).join('')}
-    ${[0,1,2,3,4,5].map(i=>`<ellipse cx='${320+i*22}' cy='${480-i*40}' rx='${140-i*16}' ry='${200-i*24}' fill='url(#glass1)' stroke='white' stroke-width='1.5' opacity='${0.5-i*0.06}'/>`).join('')}
-    <rect y='460' width='800' height='40' fill='#3A5A6A' opacity='0.4'/>
-  </svg>`,
-
-  survey: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' preserveAspectRatio='xMidYMid slice'>
-    <defs>
-      <linearGradient id='sky2' x1='0' y1='0' x2='0' y2='1'>
-        <stop offset='0%' stop-color='#A8C8E0'/><stop offset='60%' stop-color='#D8EAF4'/><stop offset='100%' stop-color='#EEF5FA'/>
-      </linearGradient>
-      <linearGradient id='beam' x1='0' y1='0' x2='0' y2='1'>
-        <stop offset='0%' stop-color='#E0E8EE'/><stop offset='50%' stop-color='#F8FAFC'/><stop offset='100%' stop-color='#B8C8D4'/>
-      </linearGradient>
-    </defs>
-    <rect width='800' height='500' fill='url(#sky2)'/>
-    <rect x='0' y='350' width='800' height='150' fill='#D8E8F0' opacity='0.6'/>
-    ${[0,1,2,3,4,5,6,7,8].map(i=>`
-      <path d='M ${-60+i*14} 500 Q ${360+i*6} ${-40-i*16} ${860-i*14} 500' fill='none' stroke='url(#beam)' stroke-width='${i===0?10:7}' opacity='${0.85-i*0.07}'/>
-      <path d='M ${-60+i*14} 500 Q ${360+i*6} ${-40-i*16} ${860-i*14} 500' fill='none' stroke='#C8D8E4' stroke-width='1' opacity='0.4'/>
-    `).join('')}
-    <ellipse cx='400' cy='480' rx='400' ry='30' fill='#B0C8D8' opacity='0.3'/>
-  </svg>`,
-
-  presenter: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' preserveAspectRatio='xMidYMid slice'>
-    <defs>
-      <linearGradient id='sky3' x1='0' y1='0' x2='0' y2='1'>
-        <stop offset='0%' stop-color='#5BA8D0'/><stop offset='55%' stop-color='#A8D0E8'/><stop offset='100%' stop-color='#D8EAF2'/>
-      </linearGradient>
-      <linearGradient id='mesh' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#B8C8D2'/><stop offset='100%' stop-color='#D8E4EC'/>
-      </linearGradient>
-    </defs>
-    <rect width='800' height='500' fill='url(#sky3)'/>
-    <rect x='0' y='320' width='800' height='180' fill='#C8DDE8' opacity='0.5'/>
-    <path d='M -20 380 Q 200 280 400 340 Q 600 400 820 260 L 820 520 L -20 520 Z' fill='url(#mesh)' opacity='0.85'/>
-    <path d='M -20 380 Q 200 280 400 340 Q 600 400 820 260' fill='none' stroke='#2A3A44' stroke-width='2.5'/>
-    ${Array.from({length:12},(_,row)=>Array.from({length:20},(_,col)=>{
-      const x=col*44+10,baseY=290+Math.sin((col+row)*0.5)*28,y=baseY+row*18;
-      return y>260?`<ellipse cx='${x}' cy='${y}' rx='10' ry='7' fill='none' stroke='#2A3A44' stroke-width='1.2' opacity='0.55'/>`:''
-    }).join('')).join('')}
-  </svg>`,
-
-  result: `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' preserveAspectRatio='xMidYMid slice'>
-    <defs>
-      <linearGradient id='sky4' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#78AECE'/><stop offset='100%' stop-color='#D0E4EE'/>
-      </linearGradient>
-      <linearGradient id='arc4' x1='0' y1='0' x2='1' y2='1'>
-        <stop offset='0%' stop-color='#1A3A6A'/><stop offset='60%' stop-color='#1E4A8A'/><stop offset='100%' stop-color='#0A1E3A'/>
-      </linearGradient>
-    </defs>
-    <rect width='800' height='500' fill='url(#sky4)'/>
-    <rect x='0' y='380' width='800' height='120' fill='#C0D4E0' opacity='0.5'/>
-    <path d='M -100 520 Q 100 -60 500 200 Q 700 340 900 160 L 900 520 Z' fill='url(#arc4)'/>
-    <path d='M -100 520 Q 100 -60 500 200 Q 700 340 900 160' fill='none' stroke='#4A7AAA' stroke-width='2'/>
-    ${Array.from({length:14},(_,i)=>`<path d='M ${-80+i*50} 520 Q ${60+i*40} ${100+i*10} ${400+i*30} ${220+i*8}' fill='none' stroke='#3A6A9A' stroke-width='0.8' opacity='0.5'/>`).join('')}
-    ${Array.from({length:8},(_,i)=>`<path d='M -100 ${340+i*26} Q 300 ${200+i*20} 900 ${280+i*18}' fill='none' stroke='#3A6A9A' stroke-width='0.8' opacity='0.45'/>`).join('')}
-    <ellipse cx='320' cy='430' rx='80' ry='20' fill='#C8A040' opacity='0.35'/>
-    <path d='M 260 520 Q 320 400 380 520' fill='#1A1A2A' opacity='0.6'/>
-  </svg>`,
+  landing:   "https://res.cloudinary.com/dclnpmurv/image/upload/v1773425005/shutterstock_2623880637_iisw95.jpg",
+  survey:    "https://res.cloudinary.com/dclnpmurv/image/upload/v1773425005/shutterstock_2673966919_uwjrrx.jpg",
+  result:    "https://res.cloudinary.com/dclnpmurv/image/upload/v1773425004/shutterstock_2681509695_vds3yi.jpg",
+  presenter: "https://res.cloudinary.com/dclnpmurv/image/upload/v1773425004/shutterstock_355870532_lemjca.jpg",
 };
 
-function svgToBg(svg) {
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-}
 
 // ─── Questions ────────────────────────────────────────────────────────────────
 const QS = [
@@ -175,7 +105,7 @@ function Page({ children, bgImg, maxW=480, overlay="rgba(13,27,46,0.72)" }) {
       <div style={{minHeight:"100vh",position:"relative",display:"flex",flexDirection:"column",
         alignItems:"center",padding:"0 16px 80px",fontFamily:"'Inter',sans-serif",overflow:"hidden"}}>
         {bgImg&&<>
-          <div style={{position:"fixed",inset:0,zIndex:0,backgroundImage:svgToBg(bgImg),backgroundSize:"cover",backgroundPosition:"center"}}/>
+          <div style={{position:"fixed",inset:0,zIndex:0,backgroundImage:`url(${bgImg})`,backgroundSize:"cover",backgroundPosition:"center"}}/>
           <div style={{position:"fixed",inset:0,zIndex:1,background:overlay}}/>
           <div style={{position:"fixed",bottom:0,left:0,right:0,height:200,zIndex:1,background:"linear-gradient(to top,rgba(0,194,224,0.08),transparent)"}}/>
         </>}
