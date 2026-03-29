@@ -415,7 +415,7 @@ export default function App() {
               style={{borderRadius:8,display:"block"}}
             />
             <div style={{textAlign:"center"}}>
-              <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cyan,marginBottom:4}}>Scan to participate</div>
+              <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cyan,marginBottom:4}}>Scan to download the report</div>
               <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.5}}>live-pulse-three.vercel.app</div>
             </div>
           </div>
