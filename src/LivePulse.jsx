@@ -404,15 +404,32 @@ export default function App() {
           </div>
         </div>
 
-        {/* Counter */}
-        <div style={{background:"rgba(255,255,255,0.06)",backdropFilter:"blur(16px)",border:"1px solid rgba(0,194,224,0.2)",borderRadius:14,padding:"24px 32px",marginBottom:16,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
-          <div>
-            <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.2em",textTransform:"uppercase",color:C.cyan,marginBottom:6}}>Responses in the room</div>
-            <div style={{fontFamily:"'Montserrat',sans-serif",fontWeight:900,fontSize:80,color:C.cyan,lineHeight:1,letterSpacing:"-0.03em",transition:"all 0.4s"}}>{tot}</div>
+        {/* QR code + counter row */}
+        <div style={{display:"grid",gridTemplateColumns:"auto 1fr",gap:16,marginBottom:16,alignItems:"stretch"}}>
+
+          {/* QR card */}
+          <div style={{background:"rgba(255,255,255,0.06)",backdropFilter:"blur(16px)",border:"1px solid rgba(0,194,224,0.2)",borderRadius:14,padding:"20px 24px",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:12}}>
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://live-pulse-three.vercel.app&bgcolor=ffffff&color=0D1B2E&margin=2`}
+              alt="QR code" width={160} height={160}
+              style={{borderRadius:8,display:"block"}}
+            />
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.15em",textTransform:"uppercase",color:C.cyan,marginBottom:4}}>Scan to participate</div>
+              <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.5}}>live-pulse-three.vercel.app</div>
+            </div>
           </div>
-          <div style={{textAlign:"right"}}>
-            <div style={{fontSize:13,color:"rgba(255,255,255,0.3)",marginBottom:6}}>2026 Learning Transformation Benchmark</div>
-            <div style={{fontSize:11,color:"rgba(255,255,255,0.18)"}}>{lastAt?`Updated ${lastAt.toLocaleTimeString()}`:"Waiting…"}</div>
+
+          {/* Counter */}
+          <div style={{background:"rgba(255,255,255,0.06)",backdropFilter:"blur(16px)",border:"1px solid rgba(0,194,224,0.2)",borderRadius:14,padding:"24px 32px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
+            <div>
+              <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.2em",textTransform:"uppercase",color:C.cyan,marginBottom:6}}>Responses in the room</div>
+              <div style={{fontFamily:"'Montserrat',sans-serif",fontWeight:900,fontSize:80,color:C.cyan,lineHeight:1,letterSpacing:"-0.03em",transition:"all 0.4s"}}>{tot}</div>
+            </div>
+            <div style={{textAlign:"right"}}>
+              <div style={{fontSize:13,color:"rgba(255,255,255,0.3)",marginBottom:6}}>2026 Learning Transformation Benchmark</div>
+              <div style={{fontSize:11,color:"rgba(255,255,255,0.18)"}}>{lastAt?`Updated ${lastAt.toLocaleTimeString()}`:"Waiting…"}</div>
+            </div>
           </div>
         </div>
 
