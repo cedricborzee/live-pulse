@@ -68,11 +68,26 @@ const BENCHMARK = {
 };
 
 function classify(r) {
-  const gov=+r.q1||0,tech=+r.q2||0,ai=+r.q3||0,meas=+r.q4||0,needs=+r.q7||0,exec=+r.q8||0;
-  const sys=(gov+tech+needs)/3;
-  if(sys>=3.3&&meas>=3.0&&exec>=3.0) return "Deliberate System Architect";
-  if(meas<=2.3&&sys>=2.5)            return "Measured, Not Believed";
-  if(gov<=2.5&&(tech>=2.5||ai>=2.5)) return "Fragmented Excellence";
+  const gov  = +r.q1||0;
+  const tech = +r.q2||0;
+  const ai   = +r.q3||0;
+  const meas = +r.q4||0;
+  const needs= +r.q7||0;
+  const exec = +r.q8||0;
+
+  const sys   = (gov + tech + needs) / 3;  // STAI proxy
+  const ailri = (ai + exec) / 2;           // AILRI proxy
+
+  // Quadrant 1 — strong on all three axes
+  if (sys >= 3.0 && ailri >= 3.0 && meas >= 3.0) return "Deliberate System Architect";
+
+  // Measured, Not Believed — decent foundations but evidence doesn't influence decisions
+  if (sys >= 2.5 && meas < 2.5) return "Measured, Not Believed";
+
+  // Fragmented Excellence — weak governance but pockets of tech or AI strength
+  if (gov < 2.8 && (ailri >= 2.8 || tech >= 2.8)) return "Fragmented Excellence";
+
+  // Ambition-Led, Architecture-Light — low system readiness across the board
   return "Ambition-Led, Architecture-Light";
 }
 
